@@ -9,7 +9,7 @@ import (
 )
 
 func SetupDB() *sql.DB {
-	db, err := sql.Open("postgres", "host=192.168.50.131 user=postgres password=1 dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
+	db, err := sql.Open("postgres", "host=127.0.0.1 user=postgres password=1 dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
 	PanicIf(err)
 
 	return db
