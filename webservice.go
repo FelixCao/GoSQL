@@ -61,7 +61,7 @@ func main() {
 	m := martini.Classic()
 	m.Map(SetupDB())
 	m.Get("/", func() string {
-    return "Hello world!"
+    return "192.168.50.131 !"
   })
 	m.Get("/show", ShowDB)
 	m.Post("/add", InsertPur)
