@@ -11,7 +11,7 @@ import (
 
 func SetupDB() *sql.DB {
 	//POSTGRESDB_PORT_5432_TCP_PORT  10.254.76.103
-	db, err := sql.Open("postgres", "host=10.254.105.89 user=postgres dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
+	db, err := sql.Open("postgres", "host=10.254.177.139 user=postgres dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
 	PanicIf(err)
 
 	return db
@@ -62,7 +62,7 @@ func InsertPur(r *http.Request, db *sql.DB){
 func main() {
 	m := martini.Classic()
 	m.Map(SetupDB())
-	m.Get("/", func() string {return  "Hello to GoSQL database"})
+	m.Get("/", func() string {return  "Hello to GoSQL database v2"})
   	m.Get("/var", func() []string {return  os.Environ() })
 	m.Get("/show", ShowDB)
 	m.Post("/add", InsertPur)
