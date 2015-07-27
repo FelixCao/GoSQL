@@ -12,7 +12,7 @@ import (
 
 func SetupDB() *sql.DB {
 	//  10.254.76.103
-	db, err := sql.Open("postgres", "host=os.Getenv(POSTGRESDB_SERVICE_HOST) user=postgres dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
+	db, err := sql.Open("postgres", "host=os.Getenv('POSTGRESDB_PORT_5432_TCP_ADDR') user=postgres dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
 	PanicIf(err)
 
 	return db
@@ -72,12 +72,9 @@ func main() {
 	})
 	m.Get("/show", ShowDB)
 	m.Get("/print1",func() string {return os.Getenv("POSTGRESDB_SERVICE_HOST")})
-	m.Get("/print2",func() string {return os.Getenv("POSTGRESDB_SERVICE_PORT")})
-	m.Get("/print3",func() string {return os.Getenv("POSTGRESDB_PORT")})
 	m.Get("/print4",func() string {return os.Getenv("POSTGRESDB_PORT_5432_TCP")})
 	m.Get("/print5",func() string {return os.Getenv("POSTGRESDB_PORT_5432_TCP_ADDR")})
-	m.Get("/print6",func() string {return os.Getenv("POSTGRESDB_PORT_5432_TCP_PORT")})
-	m.Get("/print7",func() string {return os.Getenv("POSTGRESDB_PORT_5432_TCP_PROTO")})
+
 	m.Post("/add", InsertPur)
 	m.Run()
 }
