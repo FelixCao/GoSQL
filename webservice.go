@@ -74,7 +74,7 @@ func main() {
 	for _, e := range os.Environ() {
         pair := strings.Split(e, "=")
 		 fmt.Println(pair[0])}	
-		 return "yo"
+		 return "hello"
 	})
 	m.Get("/show", ShowDB)
 	m.Post("/add", InsertPur)
