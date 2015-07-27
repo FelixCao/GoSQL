@@ -12,7 +12,7 @@ import (
 
 func SetupDB() *sql.DB {
 	//  10.254.76.103
-	db, err := sql.Open("postgres", "host=os.Getenv(POSTGRESDB_PORT_5432_TCP_ADDR) user=postgres dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
+	db, err := sql.Open("postgres", "host=os.Getenv(POSTGRESDB_SERVICE_HOST) user=postgres dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
 	PanicIf(err)
 
 	return db
@@ -64,12 +64,6 @@ func main() {
 	m := martini.Classic()
 	m.Map(SetupDB())
 	m.Get("/", func() string {return  "Hello to GoSQL database v1.5"})
-	m.Get("/Host", func() string {return  os.Getenv(HOSTNAME)})
-	m.Get("/post5432tcp", func() string {return  os.Getenv(POSTGRESDB_PORT_5432_TCP)})
-	m.Get("/postservhost", func() string {return  os.Getenv(POSTGRESDB_SERVICE_HOST)})
-	m.Get("/postservport", func() string {return  os.Getenv(POSTGRESDB_SERVICE_HOST)})
-	m.Get("/postport", func() string {return  os.Getenv(POSTGRESDB_SERVICE_HOST)})
-	
   	m.Get("/var", func() string {
 	for _, e := range os.Environ() {
         pair := strings.Split(e, "=")
