@@ -6,11 +6,12 @@ import (
 	"github.com/go-martini/martini"			//extra frame work build on net/http
 	_ "github.com/lib/pq"					//go sql driver 
 	"net/http"								//framework
+	"os"
 )
 
 func SetupDB() *sql.DB {
 	//POSTGRESDB_PORT_5432_TCP_PORT  10.254.76.103
-	db, err := sql.Open("postgres", "host=POSTGRESDB_PORT_5432_TCP_PORT user=postgres dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
+	db, err := sql.Open("postgres", "host=localhost user=postgres dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
 	PanicIf(err)
 
 	return db
@@ -61,9 +62,8 @@ func InsertPur(r *http.Request, db *sql.DB){
 func main() {
 	m := martini.Classic()
 	m.Map(SetupDB())
-	m.Get("/", func() string {
-    return "192.168.50.131 !"
-  })
+	m.Get("/", func() string {return  "Hello to GoSQL database"})
+  	m.Get("/var", func() []string {return  os.Environ() })
 	m.Get("/show", ShowDB)
 	m.Post("/add", InsertPur)
 	m.Run()
