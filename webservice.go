@@ -63,7 +63,7 @@ func InsertPur(r *http.Request, db *sql.DB){
 func main() {
 	m := martini.Classic()
 	m.Map(SetupDB())
-	m.Get("/", func() string {return  "Hello to GoSQL database v1.5"})
+	m.Get("/", func() string {return  "Welcome to GoSQL database"})
   	m.Get("/var", func() string {
 	for _, e := range os.Environ() {
         pair := strings.Split(e, "=")
