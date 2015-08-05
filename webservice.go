@@ -62,7 +62,6 @@ func InsertPur(r *http.Request, db *sql.DB){
 
 func main() {
 	m := martini.Classic()
-	m.RunOnAddr(":8080")
 	m.Map(SetupDB())
 	m.Get("/", func() string {return  "Welcome to GoSQL database"})
   	m.Get("/var", func() string {
@@ -77,6 +76,5 @@ func main() {
 	m.Get("/print5",func() string {return os.Getenv("POSTGRESDB_PORT_5432_TCP_ADDR")})
 
 	m.Post("/add", InsertPur)
-	m.Run()
-	
+	m.RunOnAddr(":8080")
 }
