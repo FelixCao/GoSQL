@@ -76,5 +76,7 @@ func main() {
 	m.Get("/print5",func() string {return os.Getenv("POSTGRESDB_PORT_5432_TCP_ADDR")})
 
 	m.Post("/add", InsertPur)
+	log.Fatal(m.RunOnAddr(":8080"))
 	m.Run()
+	
 }
