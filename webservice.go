@@ -72,8 +72,9 @@ func main() {
 	})
 	m.Get("/show", ShowDB)
 	m.Get("/print1",func() string {return os.Getenv("POSTGRESDB_SERVICE_HOST")})
-	m.Get("/print4",func() string {return os.Getenv("POSTGRESQL_PASSWORD")})
-	m.Get("/print5",func() string {return os.Getenv("POSTGRESQL_USER")})
+	m.Get("/print4",func() string {return os.Getenv("OPENSHIFT_POSTGRESQL_PASSWORD")})
+	m.Get("/print5",func() string {return os.Getenv("OPENSHIFT_POSTGRESQL_USER")})
+	m.Get("/print6",func() string {return os.Getenv("POSTGRESQL_USER")})
 
 	m.Post("/add", InsertPur)
 	m.RunOnAddr(":8080")
