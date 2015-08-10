@@ -1,20 +1,19 @@
 package main
 
 import (
-	"database/sql"							//used for unifrom database access
+	"database/sql"								//used for unifrom database access
 	"fmt"									//print statements
-	"github.com/go-martini/martini"			//extra frame work build on net/http
-	_ "github.com/lib/pq"					//go sql driver 
+	"github.com/go-martini/martini"						//extra frame work build on net/http
+	_ "github.com/lib/pq"							//go sql driver 
 	"net/http"								//framework
-	"strings"
-	"os"
+	"strings"				
+	"os"									//used to pull env vars
 )
 
-func SetupDB() *sql.DB {
-	//  10.254.76.103
+func SetupDB() *sql.DB {							//Change host to fit use 10.254.76.103 
+										//Current setup is for open shift							
 	db, err := sql.Open("postgres", "host=postgresql user=docker password=docker dbname=postgres sslmode=disable") 		//my only lib/pq usage? login into postgres database
 	PanicIf(err)
-
 	return db
 }
 
